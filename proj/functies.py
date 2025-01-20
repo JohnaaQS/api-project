@@ -1,18 +1,31 @@
 import requests
 
 
-
-def neighbourhoods(search:str) -> dict:
-    "geef de eerste wijk die er is. "
-    url= f"https://www.thecocktaildb.com/api/json/v1/1/search.php?s={search}"
+def neighbourhoods() -> dict:
+    url= f"https://data.police.uk/api/leicestershire/neighbourhoods"
     response_json = requests.get(url).json()
+    return response_json
 
-    if response_json == {"drinks": None}:
-        return False
-    return response_json["drinks"][0]
-
-def get_random_drink() -> dict:
-    " Geef een random drankje "
-    url= f"https://www.thecocktaildb.com/api/json/v1/1/random.php"
+def street_crimes() -> dict:
+    " Geef een criminele activiteit in de wijk. "
+    url= f"https://data.police.uk/docs/method/crime-street/"
     response_json = requests.get(url).json()
     return response_json["drinks"][0]
+
+def forces() -> dict:
+    " Geef de verschillende forces. "
+    url= f"https://data.police.uk/api/forces"
+    response_json = requests.get(url).json()
+    return response_json["drinks"][0]
+
+def specificneighbourhood(specific_code: str) -> dict:
+    " Geef de verschillende forces. "
+    url= f"https://data.police.uk/api/leicestershire/{specific_code}"
+    response_json = requests.get(url).json()
+    return response_json
+
+def stopandsearch() -> dict:
+    " Geef de verschillende forces. "
+    url= f"https://data.police.uk/api/stops-street?date=2024-01&lat=52.629729&lng=-1.131592"
+    response_json = requests.get(url).json()
+    return response_json
